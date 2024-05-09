@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="tf" type="static_transform_publisher" name="ned_to_enu_pub" args="0 0 0 1.57079632679 0 3.14159265359 world_ned world_enu 100"/>
+	<node pkg="tf" type="static_transform_publisher" name="world_pub" args="0 0 0 0 0 0 world_enu world 100"/>
+</launch>

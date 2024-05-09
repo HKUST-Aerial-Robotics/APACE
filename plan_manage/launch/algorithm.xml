@@ -1,0 +1,320 @@
+<launch>
+  <arg name="mode"/>
+
+  <arg name="map_min_x"/>
+  <arg name="map_min_y"/>
+  <arg name="map_min_z"/>
+  <arg name="map_max_x"/>
+  <arg name="map_max_y"/>
+  <arg name="map_max_z"/>
+
+  <arg name="box_min_x"/>
+  <arg name="box_min_y"/>
+  <arg name="box_min_z"/>
+  <arg name="box_max_x"/>
+  <arg name="box_max_y"/>
+  <arg name="box_max_z"/>
+
+  <arg name="vbox_min_x"/>
+  <arg name="vbox_min_y"/>
+  <arg name="vbox_min_z"/>
+  <arg name="vbox_max_x"/>
+  <arg name="vbox_max_y"/>
+  <arg name="vbox_max_z"/>
+
+  <arg name="init_x"/>
+  <arg name="init_y"/>
+  <arg name="init_z"/>
+  <arg name="init_yaw"/>
+
+  <arg name="goal_x"/>
+  <arg name="goal_y"/>
+  <arg name="goal_z"/>
+
+  <arg name="occupancy_map_file"/>
+  <arg name="esdf_map_file"/>
+  <arg name="feature_map_file"/>
+
+  <arg name="world_frame" value="world"/>
+  <arg name="sensor_frame" value="camera"/>
+
+  <arg name="odometry_topic"/>
+  <arg name="sensor_pose_topic"/>
+  <arg name="depth_image_topic"/>
+  <arg name="pointcloud_topic"/>
+  <arg name="feature_cloud_topic"/>
+
+  <arg name="image0_topic"/>
+  <arg name="image1_topic"/>
+  <arg name="fx"/>
+  <arg name="fy"/>
+  <arg name="cx"/>
+  <arg name="cy"/>
+
+  <arg name="image_width"/>
+  <arg name="image_height"/>
+
+  <arg name="max_vel"/>
+  <arg name="max_acc"/>
+  <arg name="max_vel_yaw"/>
+
+  <arg name="ld_smooth"/>
+  <arg name="ld_dist"/>
+  <arg name="ld_feasi"/>
+  <arg name="ld_start"/>
+  <arg name="ld_end"/>
+  <arg name="ld_waypt"/>
+  <arg name="ld_time"/>
+  <arg name="ld_yaw_feasi"/>
+  <arg name="ld_parallax"/>
+  <arg name="ld_vertical_visibility"/>
+  <arg name="ld_yaw_covisibility"/>  
+
+  <node pkg="plan_manage" name="fast_planner_node" type="fast_planner_node" output="screen">
+    <param name="log_path" value="$(env HOME)/log/active_exploration"/>
+
+    <remap from ="/odom_world" to="$(arg odometry_topic)"/>
+    <remap from ="/voxel_mapping/depth_image_topic" to = "$(arg depth_image_topic)"/>
+    <remap from ="/voxel_mapping/pointcloud" to="$(arg pointcloud_topic)"/>
+    <remap from ="/voxel_mapping/feature_cloud" to="$(arg feature_cloud_topic)"/>
+    <remap from ="/transformer/sensor_pose_topic"   to = "$(arg sensor_pose_topic)"/>
+
+    <param name="voxel_mapping/mode" value="$(arg mode)" type="string"/>
+    <param name="voxel_mapping/resolution" value="0.1" type="double"/>
+    <param name="voxel_mapping/obstacles_inflation" value="0.099" type="double"/>
+    <param name="voxel_mapping/local_bound_inflate" value="0.5" type="double"/>
+    <param name="voxel_mapping/local_map_margin" value="50" type="int"/>
+
+    <param name="voxel_mapping/default_dist" value="0.0" type="double"/>
+    <param name="voxel_mapping/optimistic" value="false" type="bool"/>
+    <param name="voxel_mapping/signed_dist" value="false" type="bool"/>
+
+    <param name="voxel_mapping/p_hit" value="0.65" type="double"/>
+    <param name="voxel_mapping/p_miss" value="0.35" type="double"/>
+    <param name="voxel_mapping/p_min" value="0.12" type="double"/>
+    <param name="voxel_mapping/p_max" value="0.90" type="double"/>
+    <param name="voxel_mapping/p_occ" value="0.80" type="double"/>
+    <param name="voxel_mapping/virtual_ceil_height" value="-10" type="int"/>
+    <param name="voxel_mapping/map_min_x" value="$(arg map_min_x)" type="double"/>
+    <param name="voxel_mapping/map_min_y" value="$(arg map_min_y)" type="double"/>
+    <param name="voxel_mapping/map_min_z" value="$(arg map_min_z)" type="double"/>
+    <param name="voxel_mapping/map_max_x" value="$(arg map_max_x)" type="double"/>
+    <param name="voxel_mapping/map_max_y" value="$(arg map_max_y)" type="double"/>
+    <param name="voxel_mapping/map_max_z" value="$(arg map_max_z)" type="double"/>
+    <param name="voxel_mapping/box_min_x" value="$(arg box_min_x)" type="double"/>
+    <param name="voxel_mapping/box_min_y" value="$(arg box_min_y)" type="double"/>
+    <param name="voxel_mapping/box_min_z" value="$(arg box_min_z)" type="double"/>
+    <param name="voxel_mapping/box_max_x" value="$(arg box_max_x)" type="double"/>
+    <param name="voxel_mapping/box_max_y" value="$(arg box_max_y)" type="double"/>
+    <param name="voxel_mapping/box_max_z" value="$(arg box_max_z)" type="double"/>
+    <param name="voxel_mapping/vbox_min_x" value="$(arg vbox_min_x)" type="double"/>
+    <param name="voxel_mapping/vbox_min_y" value="$(arg vbox_min_y)" type="double"/>
+    <param name="voxel_mapping/vbox_min_z" value="$(arg vbox_min_z)" type="double"/>
+    <param name="voxel_mapping/vbox_max_x" value="$(arg vbox_max_x)" type="double"/>
+    <param name="voxel_mapping/vbox_max_y" value="$(arg vbox_max_y)" type="double"/>
+    <param name="voxel_mapping/vbox_max_z" value="$(arg vbox_max_z)" type="double"/>
+
+    <param name="voxel_mapping/fx" value="$(arg fx)" type="double"/>
+    <param name="voxel_mapping/fy" value="$(arg fy)" type="double"/>
+    <param name="voxel_mapping/cx" value="$(arg cx)" type="double"/>
+    <param name="voxel_mapping/cy" value="$(arg cy)" type="double"/>
+    <param name="voxel_mapping/depth_filter_margin" value="2" type="int"/>
+    <param name="voxel_mapping/depth_scaling_factor" value="1000.0" type="double"/>
+    <param name="voxel_mapping/skip_pixel" value="4" type="int"/>
+    <param name="voxel_mapping/publish_tsdf" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_esdf" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_occupancy_grid" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_feature_map" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_tsdf_slice" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_esdf_slice" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_occupancy_grid_slice" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_tsdf_period" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_esdf_period" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_occupancy_grid_period" value="true" type="bool"/>
+    <param name="voxel_mapping/tsdf_slice_height" value="0.5" type="double"/>
+    <param name="voxel_mapping/tsdf_slice_visualization_height" value="0.5" type="double"/>
+    <param name="voxel_mapping/esdf_slice_height" value="1.0" type="double"/>
+    <param name="voxel_mapping/esdf_slice_visualization_height" value="1.0" type="double"/>
+    <param name="voxel_mapping/occupancy_grid_slice_height" value="-0.5" type="double"/>
+    <param name="voxel_mapping/world_frame" value="$(arg world_frame)" type="string"/>
+    <param name="voxel_mapping/sensor_frame" value="$(arg sensor_frame)" type="string"/>
+
+    <param name="voxel_mapping/verbose" value="false" type="bool"/>
+    <param name="voxel_mapping/verbose_time" value="false" type="bool"/>
+
+    <param name="voxel_mapping/tsdf/truncated_dist" value="0.82" type="double"/>
+    <param name="voxel_mapping/tsdf/truncated_dist_behind" value="0.2" type="double"/>
+    <param name="voxel_mapping/tsdf/raycast_min" value="0.0" type="double"/>
+    <param name="voxel_mapping/tsdf/raycast_max" value="5.0" type="double"/>
+    <param name="voxel_mapping/tsdf/result_truncated_dist" value="0.2" type="double"/>
+    <param name="voxel_mapping/tsdf/epsilon" value="1e-4" type="double"/>
+
+    <!-- <param name="voxel_mapping/occupancy_grid/TSDF_cutoff_dist" value="0.1" type="double"/> -->
+    <param name="voxel_mapping/occupancy_grid/TSDF_cutoff_dist" value="0.8" type="double"/>
+    <param name="voxel_mapping/occupancy_grid/occupancy_grid_mode" value="GEN_TSDF" type="string"/>
+
+    <param name="voxel_mapping/feature_map/depth_min" value="0.2" type="double"/>
+    <param name="voxel_mapping/feature_map/depth_max" value="5.0" type="double"/>
+
+    <param name="transformer/world_frame" value="$(arg world_frame)" type="string"/>
+    <param name="transformer/sensor_frame" value="$(arg sensor_frame)" type="string"/>
+    <param name="transformer/timestamp_tolerance" value="1e-3" type="double"/>
+    <param name="transformer/verbose" value="false" type="bool"/>
+    <param name="transformer/pose_topic_type" value="pose" type="string"/>
+
+    <param name="planning_vis/world_frame" value="$(arg world_frame)" type="string"/>
+
+    <!-- planning fsm -->
+    <param name="planner_node/planner" value="1" type="int"/>
+
+    <param name="fsm/flight_type" value="2" type="int"/>
+    <param name="fsm/thresh_replan" value="1.5" type="double"/>
+    <param name="fsm/thresh_no_replan" value="2.0" type="double"/>
+
+    <param name="fsm/wp_num" value="1" type="int"/>
+
+    <!-- <param name="fsm/wp0_x" value="3.0" type="double"/>
+    <param name="fsm/wp0_y" value="20.0" type="double"/>
+    <param name="fsm/wp0_z" value="2.0" type="double"/> -->
+
+    <param name="fsm/wp0_x" value="$(arg goal_x)" type="double"/>
+    <param name="fsm/wp0_y" value="$(arg goal_y)" type="double"/>
+    <param name="fsm/wp0_z" value="$(arg goal_z)" type="double"/>
+ 
+    <!-- <param name="fsm/wp0_x" value="8.0" type="double"/>
+    <param name="fsm/wp0_y" value="10.0" type="double"/>
+    <param name="fsm/wp0_z" value="2.0" type="double"/> -->
+
+    <!-- Yaw planner utils -->
+    <param name="yaw_initial/yaw_diff" value="$(eval 30 * 3.1415926 / 180.0)" type="double"/>
+    <param name="yaw_initial/half_vert_num" value="5" type="int"/>
+    <param name="yaw_initial/max_yaw_rate" value="$(eval 90 * 3.1415926 / 180.0)" type="double"/>
+    <param name="yaw_initial/w" value="0.0" type="double"/>
+    <param name="yaw_initial/w_forwarding" value="0.5" type="double"/>
+    <param name="yaw_initial/weight_type" value="1" type="double"/>
+
+    <!-- Planner manager -->
+    <param name="manager/max_vel" value="$(arg max_vel)" type="double"/>
+    <param name="manager/max_acc" value="$(arg max_acc)" type="double"/>
+    <param name="manager/max_jerk" value="4" type="double"/>
+    <param name="manager/local_segment_length" value="6.0" type="double"/>
+    <param name="manager/clearance_threshold" value="0.2" type="double"/>
+    <param name="manager/control_points_distance" value="0.5" type="double"/>
+    <param name="manager/min_time" value="true" type="bool"/>
+
+    <param name="manager/use_geometric_path" value="true" type="bool"/>
+    <param name="manager/use_optimization" value="true" type="bool"/>
+    <param name="manager/use_initial_yaw" value="true" type="bool"/>
+    <param name="manager/use_parallax" value="true" type="bool"/>
+
+    <!-- <param name="manager/occupancy_map_file" value="$(find voxel_mapping)/resource/feature_center_occu.txt" type="string"/>
+    <param name="manager/esdf_map_file" value="$(find voxel_mapping)/resource/feature_center_esdf.txt" type="string"/> -->
+    <param name="manager/occupancy_map_file" value="$(arg occupancy_map_file)" type="string"/>
+    <param name="manager/esdf_map_file" value="$(arg esdf_map_file)" type="string"/>
+    <param name="manager/feature_map_file" value="$(arg feature_map_file)" type="string"/>
+
+    <!-- geometric path searching -->
+    <param name="astar/lambda_heu" value="100000.0" type="double"/>
+    <param name="astar/resolution_astar" value="0.1" type="double"/>
+    <param name="astar/allocate_num" value="100000" type="int"/>
+    <param name="astar/max_search_time" value="0.001" type="double"/>
+
+    <!-- kinodynamic path searching -->
+    <param name="search/max_tau" value="0.5" type="double"/>
+    <param name="search/init_max_tau" value="1.0" type="double"/>
+    <param name="search/max_vel" value="$(arg max_vel)" type="double"/>
+    <param name="search/vel_margin" value="0.25" type="double"/>
+    <param name="search/max_acc" value="$(arg max_acc)" type="double"/>
+    <param name="search/w_time" value="10.0" type="double"/>
+    <param name="search/horizon" value="7.0" type="double"/>
+    <param name="search/lambda_heu" value="10.0" type="double"/>
+    <param name="search/resolution_astar" value="0.025" type="double"/>
+    <param name="search/time_resolution" value="0.8" type="double"/>
+    <param name="search/margin" value="0.2" type="double"/>
+    <param name="search/allocate_num" value="100000" type="int"/>
+    <param name="search/check_num" value="10" type="int"/>
+    <param name="search/optimistic" value="false" type="bool"/>
+
+    <!-- trajectory optimization -->
+    <param name="optimization/visualization" value="false" type="bool"/>
+
+    <!-- <param name="optimization/ld_smooth" value="20.0" type="double"/> -->
+    <param name="optimization/ld_smooth" value="$(arg ld_smooth)" type="double"/>
+    <param name="optimization/ld_dist" value="$(arg ld_dist)" type="double"/>
+    <param name="optimization/ld_feasi" value="$(arg ld_feasi)" type="double"/>
+    <param name="optimization/ld_start" value="$(arg ld_start)" type="double"/>
+    <param name="optimization/ld_end" value="$(arg ld_end)" type="double"/>
+    <!-- <param name="optimization/ld_guide" value="1.5" type="double"/> -->
+    <param name="optimization/ld_waypt" value="$(arg ld_waypt)" type="double"/>
+    <!-- <param name="optimization/ld_view" value="0.0" type="double"/> -->
+    <param name="optimization/ld_time" value="$(arg ld_time)" type="double"/>
+    <!-- <param name="optimization/ld_info" value="1.0" type="double"/> -->
+    <param name="optimization/ld_yaw_feasi" value="$(arg ld_yaw_feasi)" type="double"/>
+    <param name="optimization/ld_parallax" value="$(arg ld_parallax)" type="double"/>
+    <param name="optimization/ld_vertical_visibility" value="$(arg ld_vertical_visibility)" type="double"/>
+    <param name="optimization/ld_yaw_covisibility" value="$(arg ld_yaw_covisibility)" type="double"/>
+
+    <param name="optimization/dist0" value="0.7" type="double"/>
+    <param name="optimization/max_vel" value="$(arg max_vel)" type="double"/>
+    <param name="optimization/max_acc" value="$(arg max_acc)" type="double"/>
+    <param name="optimization/max_vel_yaw" value="$(arg max_vel_yaw)" type="double"/>
+
+    <param name="optimization/algorithm1" value="15" type="int"/>
+    <param name="optimization/algorithm2" value="11" type="int"/>
+    <param name="optimization/max_iteration_num1" value="2" type="int"/>
+    <param name="optimization/max_iteration_num2" value="2000" type="int"/>
+    <param name="optimization/max_iteration_num3" value="200" type="int"/>
+    <param name="optimization/max_iteration_num4" value="200000" type="int"/>
+
+    <param name="optimization/max_iteration_time1" value="0.0001" type="double"/>
+    <param name="optimization/max_iteration_time2" value="0.01" type="double"/>
+    <param name="optimization/max_iteration_time3" value="0.003" type="double"/>
+    <param name="optimization/max_iteration_time4" value="2.0" type="double"/>
+
+    <param name="optimization/parallax/estimator_freq" value="10.0" type="double"/>
+    <!-- <param name="optimization/parallax/max_parallax" value="$(eval 7 * 3.1415926 / 180.0)" type="double"/>
+    <param name="optimization/parallax/pot_a" value="15.0" type="double"/> -->
+    <param name="optimization/parallax/max_parallax" value="$(eval 10 * 3.1415926 / 180.0)" type="double"/>
+    <param name="optimization/parallax/pot_a" value="20.0" type="double"/>
+  </node>
+
+  <!-- trajectory server -->
+  <node pkg="plan_manage" name="traj_server_node" type="traj_server" output="screen">
+    <!-- <remap from="/position_cmd" to="/planning/pos_cmd"/> -->
+    <remap from="/odom_world" to="$(arg odometry_topic)"/>
+
+    <param name="traj_server/init_sleep_time" value="1.5" type="double"/>
+    <param name="traj_server/pub_traj_id" value="4" type="int"/>
+
+    <!-- <param name="traj_server/init_x" value="3.0" type="double"/>
+    <param name="traj_server/init_y" value="0.0" type="double"/>
+    <param name="traj_server/init_z" value="2.0" type="double"/>
+    <param name="traj_server/init_yaw" value="0.0" type="double"/> -->
+    
+    <param name="traj_server/init_x" value="$(arg init_x)" type="double"/>
+    <param name="traj_server/init_y" value="$(arg init_y)" type="double"/>
+    <param name="traj_server/init_z" value="$(arg init_z)" type="double"/>
+    <param name="traj_server/init_yaw" value="$(arg init_yaw)" type="double"/>
+
+    <param name="traj_server/kx_x" value="5.7" type="double"/>
+    <param name="traj_server/kx_y" value="5.7" type="double"/>
+    <param name="traj_server/kx_z" value="20.0" type="double"/>
+    <param name="traj_server/kv_x" value="3.4" type="double"/>
+    <param name="traj_server/kv_y" value="3.4" type="double"/>
+    <param name="traj_server/kv_z" value="4.0" type="double"/>
+
+    <param name="perception_utils/top_angle" value="0.56125" type="double"/>
+    <param name="perception_utils/left_angle" value="0.69222" type="double"/>
+    <param name="perception_utils/right_angle" value="0.68901" type="double"/>
+    <param name="perception_utils/max_dist" value="4.5" type="double"/>
+    <param name="perception_utils/vis_dist" value="1.0" type="double"/>
+
+  </node>
+
+  <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator" output="screen">
+    <remap from="~odom" to="$(arg odometry_topic)"/>
+    <remap from="~goal" to="/move_base_simple/goal"/>
+    <remap from="~traj_start_trigger" to="/traj_start_trigger" />
+    <param name="waypoint_type" value="manual-lonely-waypoint"/>
+  </node>
+</launch>

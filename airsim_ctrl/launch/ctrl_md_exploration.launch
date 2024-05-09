@@ -1,0 +1,19 @@
+<launch>
+	<arg name="uavname" default="fpv" />
+	<!-- <arg name="use_octree" value="true"/> -->
+	<arg name="enable_vins" type="bool" default="false"/>
+	
+	<!-- airsim  ros -->
+	<include file="$(find airsim_ros_pkgs)/launch/airsim_node.launch">
+		<!-- <arg name="use_octree" value="$(arg use_octree)"/> -->
+	</include>
+
+	<node pkg="airsim_ctrl" type="Ctrl_node" name="airsim_ctrl" output="screen">
+		<remap unless="$(arg enable_vins)" from="~odom" to="/airsim_node/drone_1/odom_local_enu" />
+		<remap if="$(arg enable_vins)" from="~odom" to="/vins_estimator/imu_propagate" />
+		<remap from="~cmd" to="/position_cmd" />
+		<remap from="~imu" to="/airsim_node/drone_1/imu/Imu" />
+		<rosparam command="load" file="$(find airsim_ctrl)/config/ctrl_param_$(arg uavname).yaml" />
+	</node>
+
+</launch>

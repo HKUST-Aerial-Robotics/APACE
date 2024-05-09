@@ -1,0 +1,75 @@
+<launch>
+  <include file="$(find plan_manage)/launch/algorithm.xml">
+    <arg name="mode" value="real"/>
+
+    <arg name="map_min_x" value="-16.0"/>
+    <arg name="map_min_y" value="-5.0"/>
+    <arg name="map_min_z" value="-2.0"/>
+    <arg name="map_max_x" value="16.0"/>
+    <arg name="map_max_y" value="27.0"/>
+    <arg name="map_max_z" value="5.0"/>
+
+    <arg name="box_min_x" value="-15.0"/>
+    <arg name="box_min_y" value="-4.0"/>
+    <arg name="box_min_z" value="0.0"/>
+    <arg name="box_max_x" value="15.0"/>
+    <arg name="box_max_y" value="26.0"/>
+    <arg name="box_max_z" value="5.0"/>
+
+    <arg name="vbox_min_x" value="-15.0"/>
+    <arg name="vbox_min_y" value="-4.0"/>
+    <arg name="vbox_min_z" value="-1.0"/>
+    <arg name="vbox_max_x" value="15.0"/>
+    <arg name="vbox_max_y" value="26.0"/>
+    <arg name="vbox_max_z" value="5.0"/> 
+    
+    <arg name="init_x" value="0.0"/>
+    <arg name="init_y" value="2.0"/>
+    <arg name="init_z" value="2.0"/>
+    <arg name="init_yaw" value="1.57"/>
+
+    <arg name="goal_x" value="-3.5"/>
+    <arg name="goal_y" value="18.0"/>
+    <arg name="goal_z" value="2.0"/>
+
+    <arg name="occupancy_map_file" value="$(find voxel_mapping)/data/feature_center_occu.txt"/>
+    <arg name="esdf_map_file" value="$(find voxel_mapping)/data/feature_center_esdf.txt"/>
+    <arg name="feature_map_file" value="$(find voxel_mapping)/data/features_center_downsampled_0.6.pcd"/>
+
+    <arg name="odometry_topic" value="/airsim_node/drone_1/odom_local_enu"/>
+    <arg name="sensor_pose_topic" value="/airsim_node/drone_1/sensor_pose"/>
+    <!-- <arg name="odometry_topic" value="/vins_estimator/imu_propagate"/>
+    <arg name="sensor_pose_topic" value="/vins_estimator/camera_pose"/> -->
+    <arg name="depth_image_topic" value="/airsim_node/drone_1/front_center_custom/DepthPlanar"/>
+    <arg name="pointcloud_topic" value="/vins_estimator/margin_cloud"/>
+    <arg name="feature_cloud_topic" value="/vins_estimator/margin_cloud"/>
+
+    <arg name="image0_topic" value="/airsim_node/drone_1/front_center_custom/Scene"/>
+    <arg name="image1_topic" value="/airsim_node/drone_1/front_center_custom_2/Scene"/>
+    <arg name="fx" value="320.0"/>
+    <arg name="fy" value="320.0"/>
+    <arg name="cx" value="320.0"/>
+    <arg name="cy" value="240.0"/>
+    <arg name="image_width" value="640"/>
+    <arg name="image_height" value="480"/>
+  
+    <arg name="max_vel" value="4.0"/>
+    <arg name="max_acc" value="2.5"/>
+    <arg name="max_vel_yaw" value="$(eval 60 * 3.1415926 / 180.0)"/>
+
+    <arg name="ld_smooth" value="25.0"/>
+    <arg name="ld_dist" value="20.0"/>
+    <arg name="ld_feasi" value="2.0"/>
+    <arg name="ld_start" value="50.0"/>
+    <arg name="ld_end" value="50.0"/>
+    <arg name="ld_waypt" value="0.5"/>
+    <arg name="ld_time" value="1.0"/>
+    <arg name="ld_yaw_feasi" value="20.0"/>
+    <arg name="ld_parallax" value="5.0"/>
+    <arg name="ld_vertical_visibility" value="5.0"/>
+    <arg name="ld_yaw_covisibility" value="0.5"/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="drone1_pub" args="0 0 0 0 0 0 drone_1 world 100"/>
+
+</launch>

@@ -1,0 +1,40 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/eason/workspace/exploration_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/active_loop/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/active_perception/include/**",
+        "/home/cindy/workspace/Active_Exploration_ws/src/VINS-Fusion/camera_models/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/exploration_manager/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/utils/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/local_sensing/include/**",
+        "/home/cindy/workspace/Active_Exploration_ws/src/VINS-Fusion/loop_fusion/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/utils/multi_map_server/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/pathfinding/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/plan_env/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/plan_manage/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/utils/pose_utils/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/utils/quadrotor_msgs/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/so3_control/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/so3_disturbance_generator/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/so3_quadrotor_simulator/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/trajectory/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/uav_simulator/utils/uav_utils/include/**",
+        "/home/eason/workspace/exploration_ws/src/active_explore/exploration_planner/voxel_mapping/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

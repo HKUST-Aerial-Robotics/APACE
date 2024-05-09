@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="exploration_utils" name="visibility_demo" type="visibility_demo" output="screen">
+  </node>
+</launch>

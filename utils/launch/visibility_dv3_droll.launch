@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="exploration_utils" name="visibility_dv3_droll" type="visibility_dv3_droll" output="screen">
+  </node>
+</launch>

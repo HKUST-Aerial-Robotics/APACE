@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="exploration_utils" name="pcd_saver" type="pcd_saver" output="screen">
+    <remap from ="/pointcloud_topic" to="/vins_estimator/margin_cloud"/>
+  </node>
+</launch>

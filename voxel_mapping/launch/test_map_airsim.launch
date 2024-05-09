@@ -1,0 +1,135 @@
+<launch>
+  <param name="/use_sim_time" value="false"/>
+  <!-- mode: airsim, uav_simuilator, real -->
+  <arg name="mode" value="airsim"/>
+
+  <arg name="map_min_x" value="-21.0"/>
+  <arg name="map_min_y" value="-3.0"/>
+  <arg name="map_min_z" value="-3.0"/>
+  <arg name="map_max_x" value="21.0"/>
+  <arg name="map_max_y" value="51.0"/>
+  <arg name="map_max_z" value="4.0"/>
+
+  <arg name="box_min_x" value="-20.0"/>
+  <arg name="box_min_y" value="-2.0"/>
+  <arg name="box_min_z" value="-2.0"/>
+  <arg name="box_max_x" value="20.0"/>
+  <arg name="box_max_y" value="50.0"/>
+  <arg name="box_max_z" value="3.0"/>
+
+  <arg name="vbox_min_x" value="-20.0"/>
+  <arg name="vbox_min_y" value="-2.0"/>
+  <arg name="vbox_min_z" value="-2.0"/>
+  <arg name="vbox_max_x" value="20.0"/>
+  <arg name="vbox_max_y" value="50.0"/>
+  <arg name="vbox_max_z" value="3.0"/>
+
+  <arg name="world_frame" value="drone_1"/>
+  <arg name="sensor_frame" value="camera"/>
+
+  <arg name="odometry_topic" value="/airsim_node/drone_1/odom_local_enu"/>
+  <arg name="sensor_pose_topic" value="/airsim_node/drone_1/camera_pose"/>
+  <arg name="depth_image_topic" value="/airsim_node/drone_1/front_center_custom/DepthPlanner"/>
+
+  <arg name="fx" value="160.0"/>
+  <arg name="fy" value="160.0"/>
+  <arg name="cx" value="160.0"/>
+  <arg name="cy" value="120.0"/>
+
+  <node pkg="voxel_mapping" name="test_map_node" type="test_map" output="screen">
+    <remap from ="/voxel_mapping/depth_image_topic" to = "$(arg depth_image_topic)"/>
+    <!-- <remap from ="/voxel_mapping/pointcloud" to="$(arg pointcloud_topic)"/>
+    <remap from ="/voxel_mapping/feature_cloud" to="$(arg feature_cloud_topic)"/> -->
+    <remap from ="/transformer/sensor_pose_topic"   to = "$(arg sensor_pose_topic)"/>
+
+    <param name="voxel_mapping/mode" value="$(arg mode)" type="string"/>
+    <param name="voxel_mapping/resolution" value="0.2" type="double"/>
+    <param name="voxel_mapping/resolution_fif" value="0.5" type="double"/>
+    <param name="voxel_mapping/obstacles_inflation" value="0.099" type="double"/>
+    <param name="voxel_mapping/local_bound_inflate" value="0.5" type="double"/>
+    <param name="voxel_mapping/local_map_margin" value="50" type="int"/>
+    <param name="voxel_mapping/default_dist" value="0.0" type="double"/>
+    <param name="voxel_mapping/optimistic" value="false" type="bool"/>
+    <param name="voxel_mapping/signed_dist" value="false" type="bool"/>
+
+    <param name="voxel_mapping/p_hit" value="0.65" type="double"/>
+    <param name="voxel_mapping/p_miss" value="0.35" type="double"/>
+    <param name="voxel_mapping/p_min" value="0.12" type="double"/>
+    <param name="voxel_mapping/p_max" value="0.90" type="double"/>
+    <param name="voxel_mapping/p_occ" value="0.80" type="double"/>
+    <param name="voxel_mapping/virtual_ceil_height" value="-10" type="int"/>
+    <param name="voxel_mapping/map_min_x" value="$(arg map_min_x)" type="double"/>
+    <param name="voxel_mapping/map_min_y" value="$(arg map_min_y)" type="double"/>
+    <param name="voxel_mapping/map_min_z" value="$(arg map_min_z)" type="double"/>
+    <param name="voxel_mapping/map_max_x" value="$(arg map_max_x)" type="double"/>
+    <param name="voxel_mapping/map_max_y" value="$(arg map_max_y)" type="double"/>
+    <param name="voxel_mapping/map_max_z" value="$(arg map_max_z)" type="double"/>
+    <param name="voxel_mapping/box_min_x" value="$(arg box_min_x)" type="double"/>
+    <param name="voxel_mapping/box_min_y" value="$(arg box_min_y)" type="double"/>
+    <param name="voxel_mapping/box_min_z" value="$(arg box_min_z)" type="double"/>
+    <param name="voxel_mapping/box_max_x" value="$(arg box_max_x)" type="double"/>
+    <param name="voxel_mapping/box_max_y" value="$(arg box_max_y)" type="double"/>
+    <param name="voxel_mapping/box_max_z" value="$(arg box_max_z)" type="double"/>
+    <param name="voxel_mapping/vbox_min_x" value="$(arg vbox_min_x)" type="double"/>
+    <param name="voxel_mapping/vbox_min_y" value="$(arg vbox_min_y)" type="double"/>
+    <param name="voxel_mapping/vbox_min_z" value="$(arg vbox_min_z)" type="double"/>
+    <param name="voxel_mapping/vbox_max_x" value="$(arg vbox_max_x)" type="double"/>
+    <param name="voxel_mapping/vbox_max_y" value="$(arg vbox_max_y)" type="double"/>
+    <param name="voxel_mapping/vbox_max_z" value="$(arg vbox_max_z)" type="double"/>
+
+    <param name="voxel_mapping/fx" value="$(arg fx)" type="double"/>
+    <param name="voxel_mapping/fy" value="$(arg fy)" type="double"/>
+    <param name="voxel_mapping/cx" value="$(arg cx)" type="double"/>
+    <param name="voxel_mapping/cy" value="$(arg cy)" type="double"/>
+    <param name="voxel_mapping/depth_filter_margin" value="0" type="int"/>
+    <param name="voxel_mapping/depth_scaling_factor" value="1000.0" type="double"/>
+    <param name="voxel_mapping/skip_pixel" value="2" type="int"/>
+    <param name="voxel_mapping/publish_tsdf" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_esdf" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_occupancy_grid" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_fif" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_tsdf_slice" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_esdf_slice" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_occupancy_grid_slice" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_tsdf_period" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_esdf_period" value="true" type="bool"/>
+    <param name="voxel_mapping/publish_occupancy_grid_period" value="true" type="bool"/>
+    <param name="voxel_mapping/tsdf_slice_height" value="-0.5" type="double"/>
+    <param name="voxel_mapping/tsdf_slice_visualization_height" value="-0.5" type="double"/>
+    <param name="voxel_mapping/esdf_slice_height" value="-0.5" type="double"/>
+    <param name="voxel_mapping/occupancy_grid_slice_height" value="-0.5" type="double"/>
+    <param name="voxel_mapping/world_frame" value="$(arg world_frame)" type="string"/>
+    <param name="voxel_mapping/sensor_frame" value="$(arg sensor_frame)" type="string"/>
+
+    <param name="voxel_mapping/verbose" value="true" type="bool"/>
+    <param name="voxel_mapping/verbose_time" value="false" type="bool"/>
+
+    <param name="voxel_mapping/tsdf/truncated_dist" value="0.2" type="double"/>
+    <param name="voxel_mapping/tsdf/raycast_min" value="2.0" type="double"/>
+    <param name="voxel_mapping/tsdf/raycast_max" value="10.0" type="double"/>
+    <param name="voxel_mapping/tsdf/epsilon" value="1e-4" type="double"/>
+
+    <param name="voxel_mapping/occupancy_grid/TSDF_cutoff_dist" value="0.1" type="double"/>
+    <param name="voxel_mapping/occupancy_grid/occupancy_grid_mode" value="GEN_TSDF" type="string"/>
+
+    <param name="voxel_mapping/fif/depth_min_dist" value="0.0" type="double"/>
+    <param name="voxel_mapping/fif/depth_max_dist" value="5.0" type="double"/>
+    <param name="voxel_mapping/fif/v_alpha" value="0.8" type="double"/>
+    <param name="voxel_mapping/fif/fov_deg" value="60.0" type="double"/>
+    <param name="voxel_mapping/fif/update_range" value="0.5" type="double"/>
+    <param name="voxel_mapping/fif/metric_type" value="0" type="int"/>
+    <param name="voxel_mapping/fif/mode" value="0" type="int"/>
+    <param name="voxel_mapping/fif/verbose" value="false" type="bool"/>
+
+    <param name="transformer/world_frame" value="$(arg world_frame)" type="string"/>
+    <param name="transformer/sensor_frame" value="$(arg sensor_frame)" type="string"/>
+    <param name="transformer/timestamp_tolerance" value="1e-3" type="double"/>
+    <param name="transformer/verbose" value="false" type="bool"/>
+    <param name="transformer/pose_topic_type" value="pose" type="string"/>
+  </node>
+
+  <!-- <?ignore -->
+  <node pkg="rosbag" type="play" name="player" output="screen" args="--clock --delay 1 -r 2.0 -s 10.0 /home/eason/source/bag/airsim_2022-09-14-23-30-52.bag"/>
+  <!-- ?> -->
+
+</launch>

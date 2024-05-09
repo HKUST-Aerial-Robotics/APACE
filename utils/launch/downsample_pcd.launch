@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="exploration_utils" name="pcd_downsampler" type="pcd_downsampler" output="screen">
+  </node>
+</launch>

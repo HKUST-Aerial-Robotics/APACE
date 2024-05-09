@@ -1,0 +1,4 @@
+PROBLEM_FILE = /home/cindy/workspace/Active_Exploration_ws/src/active_explore/exploration_planner/utils/resource/single_frontier.tsp
+GAIN23 = NO
+OUTPUT_TOUR_FILE =/home/cindy/workspace/Active_Exploration_ws/src/active_explore/exploration_planner/utils/resource/single_frontier.txt
+RUNS = 1
