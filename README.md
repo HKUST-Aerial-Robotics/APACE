@@ -7,10 +7,10 @@
 <img alt="arxiv" src="https://img.shields.io/badge/arXiv-2403.08365-004088.svg"/>
 </a>
 <a href="https://youtu.be/FIM3ta6p_d0">
-<img alt="Youtube" src="https://img.shields.io/badge/:tv:-Youtube-red"/>
+<img alt="Youtube" src="https://img.shields.io/badge/Video-Youtube-red"/>
 </a>
 <a href="https://www.bilibili.com/video/BV1sC4y1Z7Ps">
-<img alt="Youtube" src="https://img.shields.io/badge/:tv:-Bilibili-pink"/>
+<img alt="Youtube" src="https://img.shields.io/badge/Video-Bilibili-pink"/>
 </a>
 </div>
 
