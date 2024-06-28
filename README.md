@@ -54,7 +54,7 @@ The setup commands have been tested on Ubuntu 20.04 (ROS Noetic). If you are usi
   ```
 * Download the [map files](https://drive.google.com/drive/folders/1IPUBSd-ACf_wFpIpqLQSaWH9s2awQ6-f?usp=sharing) from Google Drive and put them in the `APACE/voxel_mapping/data` folder.
 
-* Download the [pre-built AirSim simulator package](https://drive.google.com/file/d/1wUkvFrmSaT2qL5vDpH49VlWv2G_kEluU/view?usp=sharing) and the [Airsim library](https://drive.google.com/file/d/1rBClGuj98AnOjyl6V00V5X-BWr4BqbrQ/view?usp=sharing) utilized in our experiments from Google Drive. You can put them in any directory you like and remember to extract them. For example, you may put them in a folder `~/source`
+* Download the [pre-built AirSim simulator package](https://drive.google.com/file/d/1wUkvFrmSaT2qL5vDpH49VlWv2G_kEluU/view?usp=sharing) and the [Airsim library](https://drive.google.com/file/d/1rBClGuj98AnOjyl6V00V5X-BWr4BqbrQ/view?usp=sharing) utilized in our experiments from Google Drive. You can put them in any directory you like and remember to extract them. For example, you may put them in a folder `~/source`.
 
 * Build the AirSim library
   ```
@@ -62,6 +62,8 @@ The setup commands have been tested on Ubuntu 20.04 (ROS Noetic). If you are usi
     ./setup.sh
     ./build.sh
   ```
+
+* Move the `settings.json` file from the repository to `~/Documents/AirSim` folder and replace the original one.
 
 * Setup the AirSim root as the directory path of the `AirSim_source` folder in the beginning of `APACE/airsim_ros_wrapper/CMakeLists.txt`.
 

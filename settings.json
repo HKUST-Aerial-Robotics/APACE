@@ -1,0 +1,110 @@
+{
+  "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/master/docs/settings.md",
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "ViewModeX": "NoDisplay",
+  "ViewModeXX": "SpringArmChase",
+  "ViewMode": "Fpv",
+  "Vehicles": {
+    "drone_1": {
+      "VehicleType": "SimpleFlight",
+      "DefaultVehicleState": "Inactive",
+      "Sensors": {
+        "Barometer": {
+          "SensorType": 1,
+          "Enabled": false
+        },
+        "Imu": {
+          "SensorType": 2,
+          "Enabled": true
+        },
+        "Gps": {
+          "SensorType": 3,
+          "Enabled": false
+        },
+        "Magnetometer": {
+          "SensorType": 4,
+          "Enabled": false
+        },
+        "Distance": {
+          "SensorType": 5,
+          "Enabled": false
+        },
+        "Lidar": {
+          "SensorType": 6,
+          "Enabled": false,
+          "NumberOfChannels": 16,
+          "RotationsPerSecond": 10,
+          "PointsPerSecond": 100000,
+          "X": 0,
+          "Y": 0,
+          "Z": -1,
+          "Roll": 0,
+          "Pitch": 0,
+          "Yaw": 0,
+          "VerticalFOVUpper": 0,
+          "VerticalFOVLower": -0,
+          "HorizontalFOVStart": -90,
+          "HorizontalFOVEnd": 90,
+          "DrawDebugPoints": true,
+          "DataFrame": "SensorLocalFrame"
+        }
+      },
+      "Cameras": {
+        "front_center_custom": {
+          "CaptureSettings": [
+            {
+              "PublishToRos": 1,
+              "ImageType": 0,
+              "Width": 640,
+              "Height": 480,
+              "FOV_Degrees": 90,
+              "DepthOfFieldFstop": 2.8,
+              "DepthOfFieldFocalDistance": 200.0,
+              "DepthOfFieldFocalRegion": 200.0,
+              "TargetGamma": 1.5
+            },
+            {
+              "PublishToRos": 1,
+              "ImageType": 1,
+              "Width": 640,
+              "Height": 480,
+              "FOV_Degrees": 90,
+              "DepthOfFieldFstop": 2.8,
+              "DepthOfFieldFocalDistance": 200.0,
+              "DepthOfFieldFocalRegion": 200.0,
+              "TargetGamma": 1.5
+            }
+          ],
+          "Pitch": 0.0,
+          "Roll": 0.0,
+          "X": 0.3,
+          "Y": 0.0,
+          "Yaw": 0.0,
+          "Z": -0.2
+        },
+        "front_center_custom_2": {
+          "CaptureSettings": [
+            {
+              "PublishToRos": 1,
+              "ImageType": 0,
+              "Width": 640,
+              "Height": 480,
+              "FOV_Degrees": 90,
+              "DepthOfFieldFstop": 2.8,
+              "DepthOfFieldFocalDistance": 200.0,
+              "DepthOfFieldFocalRegion": 200.0,
+              "TargetGamma": 1.5
+            }
+          ],
+          "Pitch": 0.0,
+          "Roll": 0.0,
+          "X": 0.3,
+          "Y": 0.2,
+          "Yaw": 0.0,
+          "Z": -0.2
+        }
+      }
+    }
+  }
+}
